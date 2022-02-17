@@ -1,0 +1,3 @@
+a.sh
+printAllArgs.sh
+z.sh

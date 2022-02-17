@@ -1,0 +1,16 @@
+Path: /home/dmitry/051004/Kachan_Dmitry_Sergeevich/lab_1/task_8
+Total size: 512 bytes
+Viewed files: 2
+
+Path: /home/dmitry/051004/Kachan_Dmitry_Sergeevich/lab_1/task_6
+Total size: 409 bytes
+Viewed files: 2
+
+Path: /home/dmitry/051004/Kachan_Dmitry_Sergeevich/lab_1/task_7
+Total size: 17283 bytes
+Viewed files: 3
+
+Path: /home/dmitry/051004/Kachan_Dmitry_Sergeevich/lab_1
+Total size: 16867 bytes
+Viewed files: 5
+
