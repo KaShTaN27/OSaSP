@@ -3,10 +3,10 @@ a=3
 deniedSymbol='/'
 if [ "$#" -ne "$a" ]
 then
-  echo "Script takes three parameters:"
-  echo "  1 - name of output file;"
-  echo "  2 - catalog;"
-  echo "  3 - files extension;"
+  echo "Script takes three parameters:" >&2
+  echo "  1 - name of output file;" >&2
+  echo "  2 - catalog;" >&2
+  echo "  3 - files extension;" >&2
 exit 0
 fi
 

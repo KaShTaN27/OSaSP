@@ -3,9 +3,9 @@ params=2
 deniedSymbol='/'
 if [ "$#" -ne "$params" ]
 then
-  echo "Script takes two parameters:"
-  echo "  1 - catalog;"
-  echo "  2 - name of output file;"
+  echo "Script takes two parameters:" >&2
+  echo "  1 - catalog;" >&2
+  echo "  2 - name of output file;" >&2
 exit 0
 fi
 
