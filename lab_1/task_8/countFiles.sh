@@ -24,6 +24,10 @@ exit 0
 ;;
 esac
 
-find $1 -type f -printf "%h %s\n" |
-awk '{summArr[$1] += $2; amountArr[$1]++} END {for (i in amountArr) printf "Path: %s\nTotal size: %d bytes\nViewed files: %d\n\n", i, summArr[i], amountArr[i]}' > $2
+echo -n > $2
+for i in `find $1 -type d`
+do
+    echo "Viewed files: $(find $i -maxdepth 1 -type f | wc -l)" >> $2
+    echo "Total size: $(du -bsh $i)" >> $2
+done
 cat $2
