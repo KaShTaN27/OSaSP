@@ -9,21 +9,20 @@ then
     echo "  2 - catalog;"
     echo "  3 - files extension;"
   } >&2
-exit 0
+exit 1
 fi
 
 case $1 in
 *"$deniedSymbol"*)
 echo "Error: Invalid output file name" >&2
-exit 0
+exit 1
 ;;
 esac
 
 if ! [ -d $2 ]
 then
   echo "Error: There is no such catalog" >&2
-  exit 0
+  exit 1
 fi
 
 find $2 -maxdepth 1 -name "*.$3" -printf "%f\n" | sort > $1
-cat $1
