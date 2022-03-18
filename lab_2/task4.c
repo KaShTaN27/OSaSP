@@ -26,8 +26,10 @@ int main(int argc, char *argv[]) {
         if (symbol == '\n') {
             lines++;
         }
-        if (lines == numLines && numLines != 0)
+        if (lines == numLines && numLines != 0) {
             getc(stdin);
+            lines = 0;
+        }
         fputc(symbol, stdout);
         symbol = (char) fgetc(file);
     }
