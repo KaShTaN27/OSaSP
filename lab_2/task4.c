@@ -1,16 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <limits.h>
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        perror("Unexpected number of parameters.\nUsage: <file_name> <number_of_lines>");
+        perror("Unexpected number of parameters.\nUsage: [file_name] [number_of_lines]");
         return -1;
     }
 
-    int numLines = atoi(argv[2]);
-    if (numLines < 0) {
-        perror("Error, please, enter an integer");
-        return -1;
+    char *endptr;
+    long numLines = strtol(argv[2], &endptr, 10);
+
+    if ((errno == ERANGE && (numLines == LONG_MAX || numLines == LONG_MIN))
+        || (errno != 0 && numLines == 0)) {
+        perror("strtol");
+        exit(EXIT_FAILURE);
+    }
+
+    if (endptr == argv[2]) {
+        fprintf(stderr, "No digits were found\n");
+        exit(EXIT_FAILURE);
     }
 
     FILE* file;
