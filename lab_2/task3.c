@@ -1,4 +1,5 @@
 #include <stdio.h>
+#define CTRL_F 6
 
 int main(int argc, char *argv[]) {
 
@@ -16,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     char symbol;
     symbol = (char) getc(stdin);
-    while (symbol != 6) {
+    while (symbol != CTRL_F) {
         fputc(symbol, file);
         symbol = (char) getc(stdin);
     }
