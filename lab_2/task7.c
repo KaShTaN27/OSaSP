@@ -3,6 +3,8 @@
 #include "stdio.h"
 #include "dirent.h"
 #include "sys/stat.h"
+#include "errno.h"
+#include "limits.h"
 
 int seenFiles = 0;
 
@@ -49,6 +51,23 @@ int checkDirectory(char *name, int min, int max, FILE* file) {
     return 0;
 }
 
+long stringToLong(char *num) {
+    char *endptr;
+    long res = strtol(num, &endptr, 10);
+
+    if ((errno == ERANGE && (res == LONG_MAX || res == LONG_MIN))
+        || (errno != 0 && res == 0)) {
+        perror("strtol");
+        exit(EXIT_FAILURE);
+    }
+
+    if (endptr == num) {
+        fprintf(stderr, "No digits were found\n");
+        exit(EXIT_FAILURE);
+    }
+    return res;
+}
+
 int main(int argc, char *argv[]) {
 
     if (argc != 5) {
@@ -56,17 +75,8 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    int min = atoi(argv[2]);
-    if (min < 0) {
-        perror("Error, please, enter an integer");
-        return -1;
-    }
-
-    int max = atoi(argv[3]);
-    if (max < 0) {
-        perror("Error, please, enter an integer");
-        return -1;
-    }
+    long min = stringToLong(argv[2]);
+    long max = stringToLong(argv[3]);
 
     FILE* file = fopen(argv[4], "w");
     if (file == NULL) {
