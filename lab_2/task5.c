@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        perror("Unexpected number of parameters");
+        fprintf(stderr, "Unexpected number of parameters\n");
         return -1;
     }
 
@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
     outputFile = fopen(argv[2], "w");
 
     if (inputFile == NULL) {
-        perror("Error with opening input file");
+        fprintf(stderr, "Error with opening input file\n");
         return -1;
     }
     if (outputFile == NULL) {
-        perror("Error with opening output file");
+        fprintf(stderr, "Error with opening input file\n");
         return -1;
     }
 
@@ -27,16 +27,23 @@ int main(int argc, char *argv[]) {
     }
 
     struct stat fileStat;
-    stat(argv[1], &fileStat);
-    chmod(argv[2], fileStat.st_mode);
+    if (stat(argv[1], &fileStat) == -1) {
+        fprintf(stderr, "Error during reading information about file\n");
+        return -1;
+    }
+    
+    if (chmod(argv[2], fileStat.st_mode) == -1) {
+        fprintf(stderr, "Error during changing access rights\n");
+        return -1;
+    }
 
     if (fclose(inputFile)) {
-        perror("Error during closing input file");
+        fprintf(stderr, "Error during closing input file\n");
         return -1;
     }
 
     if (fclose(outputFile)) {
-        perror("Error during closing output file");
+        fprintf(stderr, "Error during closing input file\n");
         return -1;
     }
 }
