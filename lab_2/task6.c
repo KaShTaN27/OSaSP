@@ -4,7 +4,7 @@
 int readDirectories(char *name) {
     DIR *directory = opendir(name);
     if (directory == NULL) {
-        perror("Error during opening directory");
+        fprintf(stderr, "Error during opening directory\n");
         return -1;
     }
 
@@ -15,7 +15,7 @@ int readDirectories(char *name) {
     }
 
     if (closedir(directory)) {
-        perror("Error during closing directory");
+        fprintf(stderr, "Error during closing directory\n");
         return -1;
     }
 
