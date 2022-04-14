@@ -27,12 +27,12 @@ int main(int argc, char *argv[]) {
     }
 
     struct stat fileStat;
-    if (stat(argv[1], &fileStat) == -1) {
+    if (stat(argv[1], &fileStat)) {
         fprintf(stderr, "Error during reading information about file\n");
         return -1;
     }
     
-    if (chmod(argv[2], fileStat.st_mode) == -1) {
+    if (chmod(argv[2], fileStat.st_mode)) {
         fprintf(stderr, "Error during changing access rights\n");
         return -1;
     }
